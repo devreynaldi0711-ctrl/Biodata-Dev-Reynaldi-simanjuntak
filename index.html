@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biodata — Arsip Pribadi</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,700;1,500;1,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#F3EEE3;--ink:#1C1712;--soft:#6E6357;--red:#C6371B;--red-lt:#E8552E;--line:rgba(28,23,18,.22)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:"Fraunces",Georgia,serif;line-height:1.5;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.05;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+::selection{background:var(--red);color:var(--paper)}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* ---------- bar atas ---------- */
+.topbar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;background:var(--paper);padding:.9rem 6vw;border-bottom:1.5px solid var(--ink);font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase}
+
+/* ---------- pembuka: foto + nama ---------- */
+.hero{display:grid;grid-template-columns:330px 1fr;gap:4.5rem;align-items:center;min-height:82vh;padding:6vh 6vw}
+.foto img{width:100%;aspect-ratio:4/5;object-fit:cover;border:1.5px solid var(--ink);box-shadow:14px 14px 0 var(--ink);filter:grayscale(1) sepia(.15);transition:filter .5s}
+.foto:hover img{filter:none}
+.foto figcaption{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin-top:.9rem}
+.kicker{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.42em;text-transform:uppercase;color:var(--red);margin-bottom:1.4rem}
+h1{font-size:clamp(2.4rem,6.5vw,5.4rem);line-height:1.04;text-transform:uppercase;letter-spacing:-.02em}
+h1 .alt{display:block;font-style:italic;color:var(--red)}
+.meta{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-top:1.6rem}
+.btn{display:inline-block;margin-top:2rem;font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;border:1.5px solid var(--ink);padding:.85rem 1.5rem;transition:.25s}
+.btn:hover{background:var(--ink);color:var(--paper)}
+
+/* ---------- teks berjalan ---------- */
+.marquee{border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);overflow:hidden;padding:.85rem 0}
+.marquee .track{display:flex;width:max-content;animation:jalan 24s linear infinite;font-style:italic;font-size:1.25rem;white-space:nowrap}
+.marquee:hover .track{animation-play-state:paused}
+.marquee .track span{padding-right:2.6rem}
+.marquee .track i{font-style:normal;color:var(--red)}
+@keyframes jalan{to{transform:translateX(-50%)}}
+
+/* ---------- bagian umum ---------- */
+section{padding:5rem 6vw;scroll-margin-top:60px}
+.judul{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.42em;text-transform:uppercase;color:var(--red);margin-bottom:.9rem}
+h2{font-size:clamp(1.7rem,3.4vw,2.7rem);font-weight:700;margin-bottom:2.2rem}
+h2 em{font-style:italic;color:var(--red)}
+
+/* ---------- data diri ---------- */
+.baris{display:flex;align-items:baseline;gap:.9rem;padding:.9rem .3rem;border-bottom:1px solid var(--line);transition:.3s}
+.baris:first-child{border-top:1.5px solid var(--ink)}
+.baris .lab{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--soft);white-space:nowrap}
+.baris .titik{flex:1;border-bottom:2px dotted rgba(28,23,18,.35)}
+.baris .isi{font-size:1.12rem;font-weight:500;text-align:right;transition:.3s}
+.baris:hover .lab,.baris:hover .isi{color:var(--red)}
+.baris:hover .isi{transform:translateX(6px)}
+
+/* ---------- pendidikan ---------- */
+.sekolah{display:grid;grid-template-columns:170px 1fr auto;align-items:center;gap:1.4rem;padding:1.25rem .3rem;border-bottom:1px solid var(--line);transition:.3s}
+.sekolah:first-child{border-top:1.5px solid var(--ink)}
+.sekolah .thn{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.1em;color:var(--soft)}
+.sekolah .nm{font-size:1.2rem;font-weight:500}
+.sekolah .jk{font-family:"IBM Plex Mono",monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;border:1.5px solid currentColor;border-radius:99px;padding:.3rem .85rem}
+.sekolah:hover{background:var(--ink);color:var(--paper);padding-left:1.1rem}
+.sekolah:hover .thn{color:var(--red-lt)}
+
+/* ---------- cita-cita & harapan ---------- */
+.gelap{background:var(--ink);color:var(--paper)}
+.gelap .judul{color:var(--red-lt)}
+.cita{font-size:clamp(1.5rem,3.8vw,2.9rem);font-weight:500;line-height:1.28;max-width:24ch}
+.cita em,.harapan em{font-style:italic;color:var(--red-lt)}
+.harapan{margin-top:3.5rem;padding-top:2.6rem;border-top:1px dashed rgba(243,238,227,.35);font-style:italic;font-size:clamp(1.05rem,2vw,1.35rem);line-height:1.8;max-width:54ch}
+.ditulis{display:block;font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(243,238,227,.55);margin-top:1.5rem}
+
+/* ---------- kontak & footer ---------- */
+footer{padding:5rem 6vw 1.8rem}
+.kontak>*{display:grid;grid-template-columns:160px 1fr 26px;align-items:center;gap:1.3rem;padding:1.3rem .3rem;border-bottom:1px solid var(--line);transition:.3s}
+.kontak>:first-child{border-top:1.5px solid var(--ink)}
+.kontak .lab{font-family:"IBM Plex Mono",monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--soft)}
+.kontak .isi{font-size:clamp(1.05rem,2.4vw,1.6rem);font-weight:500;word-break:break-word}
+.kontak svg{width:18px;height:18px;opacity:.35;transition:.3s}
+.kontak>*:hover{background:var(--ink);color:var(--paper);padding-left:1rem}
+.kontak>*:hover .lab{color:var(--red-lt)}
+.kontak>*:hover svg{opacity:1;color:var(--red-lt)}
+.credit{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem;font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--soft);margin-top:2.6rem}
+
+/* ---------- animasi muncul ---------- */
+.muncul{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .8s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0s)}
+.muncul.lihat{opacity:1;transform:none}
+
+/* ---------- layar kecil ---------- */
+@media(max-width:820px){
+  .hero{grid-template-columns:1fr;gap:2.8rem;min-height:auto;padding-top:3rem}
+  .foto{max-width:290px}
+  .baris{flex-wrap:wrap}
+  .baris .titik{display:none}
+  .baris .isi{width:100%;text-align:left}
+  .sekolah{grid-template-columns:1fr auto;gap:.35rem 1rem}
+  .sekolah .thn{grid-column:1/-1}
+  .kontak>*{grid-template-columns:1fr auto;gap:.4rem 1rem}
+  .kontak .lab{grid-column:1/-1}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.muncul{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="topbar"><span>Biodata — No. 001/<span class="tahun"></span></span><span>Arsip Pribadi</span></div>
+
+<header class="hero">
+  <figure class="foto muncul">
+    <img id="foto" alt="Foto diri">
+    <figcaption>Fig. 01 — sentuh foto untuk versi warna</figcaption>
+  </figure>
+  <div>
+    <p class="kicker muncul" style="--d:.1s">Profil Pribadi</p>
+    <h1 id="nama" class="muncul" style="--d:.2s"></h1>
+    <p class="meta muncul" style="--d:.32s"><span data-f="usia"></span> · <span data-f="jenisKelamin"></span> · <span data-f="domisili"></span></p>
+    <a class="btn muncul" style="--d:.42s" href="#data">Lihat Data ↓</a>
+  </div>
+</header>
+
+<div class="marquee"><div class="track" id="mq"></div></div>
+
+<section id="data">
+  <p class="judul muncul">01 / Data Diri</p>
+  <h2 class="muncul">Formulir <em>Identitas</em></h2>
+  <div id="rows"></div>
+</section>
+
+<section id="pendidikan">
+  <p class="judul muncul">02 / Pendidikan</p>
+  <h2 class="muncul">Perjalanan <em>Belajar</em></h2>
+  <div id="daftarSekolah"></div>
+</section>
+
+<section class="gelap">
+  <p class="judul muncul">03 / Cita-cita &amp; Harapan</p>
+  <p class="cita muncul" data-f="citaCita" data-rich></p>
+  <p class="harapan muncul" data-f="harapan" data-rich></p>
+  <span class="ditulis muncul">— <span data-f="panggilan"></span></span>
+</section>
+
+<footer>
+  <p class="judul muncul">04 / Kontak</p>
+  <h2 class="muncul">Hubungi <em>Saya</em></h2>
+  <div class="kontak">
+    <a id="kEmail" class="muncul" href="#">
+      <span class="lab">Email</span><span class="isi" data-f="email"></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+    </a>
+    <a id="kTelp" class="muncul" href="#">
+      <span class="lab">Telepon / WA</span><span class="isi" data-f="telepon"></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+    </a>
+    <div class="muncul">
+      <span class="lab">Alamat</span><span class="isi" data-f="alamat"></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+    </div>
+  </div>
+  <div class="credit"><span>© <span class="tahun"></span> <span data-f="nama"></span></span><span>Disusun dengan teliti — Arsip No. 001</span></div>
+</footer>
+
+<script>
+
+const BIODATA = {
+  nama: "Dev Reynaldi Simanjuntak",            
+  panggilan: "Dev",                      
+  ttl: "Pagaran, 7 November 2007",        
+  usia: "18 Tahun",
+  jenisKelamin: "Laki-laki",
+  agama: "Kristen Protestan",
+  domisili: "Pagaran, ID",
+  alamat: "Jl. Perjuangan No.125, Kec. Medan Tembung, Kota Medan, Sumatera Utara",
+  pendidikan: "S1 Ilmu Komputer (semester 3)",
+  hobi: "berenang,bermain game,Mendengarkan Musik",
+  motto: "Berbuat baik hari ini, panen bahagia esok hari.",
+  citaCita: "Menjadi *Programmer* yang menciptakan web *bermanfaat* bagi diri sendiri dan orang lain.",
+  harapan: "Semoga setiap usia yang dilewati menjadikan saya pribadi yang *lebih baik*, lebih tenang, dan selalu bersyukur.",
+  email: "devreynaldi0711@email.com",
+  telepon: "+62 822-4948-9645",
+  foto: "myfoto.jpeg", 
+  sekolah: [                              
+    { thn: "2013–2018", jk: "SD",  nm: "SD Negeri 1 Sipultak" },
+    { thn: "2018–2021", jk: "SMP", nm: "SMP Santa Lusia Siborong-borong" },
+    { thn: "2022–2025", jk: "SMA", nm: "SMA Negeri 1 Pagaran" },
+    { thn: "2025–kini", jk: "S1",  nm: "Universitas Negeri Medan — Ilmu Komputer" },
+  ]
+};
+
+
+const rich = t => String(t).replace(/\*(.+?)\*/g, "<em>$1</em>");
+
+// isi semua elemen bertanda data-f
+document.querySelectorAll("[data-f]").forEach(el => {
+  const v = BIODATA[el.dataset.f];
+  if (v !== undefined) el.innerHTML = el.hasAttribute("data-rich") ? rich(v) : v;
+});
+
+// nama besar: kata ganjil biasa, kata genap miring merah 
+document.getElementById("nama").innerHTML =
+  BIODATA.nama.trim().split(/\s+/).map((k, i) => i % 2 ? `<span class="alt">${k}</span>` : k).join(" ");
+
+// foto & judul tab
+const foto = document.getElementById("foto");
+foto.src = BIODATA.foto;
+foto.alt = "Foto diri — " + BIODATA.nama;
+document.title = "Biodata — " + BIODATA.nama;
+
+// tabel data diri
+document.getElementById("rows").innerHTML = [
+  ["Nama Lengkap", "nama"], ["Panggilan", "panggilan"],
+  ["Tempat, Tgl. Lahir", "ttl"], ["Usia", "usia"],
+  ["Jenis Kelamin", "jenisKelamin"], ["Agama", "agama"],
+  ["Alamat", "alamat"], ["Pendidikan", "pendidikan"],
+  ["Hobi", "hobi"], ["Motto Hidup", "motto"]
+].map(([lab, k], i) =>
+  `<div class="baris muncul" style="--d:${(i * .05).toFixed(2)}s">
+     <span class="lab">${lab}</span><span class="titik"></span><span class="isi">${BIODATA[k]}</span>
+   </div>`).join("");
+
+// daftar pendidikan
+document.getElementById("daftarSekolah").innerHTML = BIODATA.sekolah.map((s, i) =>
+  `<div class="sekolah muncul" style="--d:${(i * .05).toFixed(2)}s">
+     <span class="thn">${s.thn}</span><span class="nm">${s.nm}</span><span class="jk">${s.jk}</span>
+   </div>`).join("");
+
+// teks berjalan
+const grup = [BIODATA.nama, "Data Diri", "Pendidikan", "Cita-cita", "Harapan"]
+  .map(t => `${t} <i>✦</i>`).join(" ");
+document.getElementById("mq").innerHTML = `<span>${grup}</span><span>${grup}</span>`;
+
+// tahun otomatis
+document.querySelectorAll(".tahun").forEach(e => e.textContent = new Date().getFullYear());
+
+// tautan kontak
+document.getElementById("kEmail").href = "mailto:" + BIODATA.email;
+document.getElementById("kTelp").href = "tel:" + BIODATA.telepon.replace(/[^+\d]/g, "");
+
+// animasi muncul saat elemen masuk layar
+const io = new IntersectionObserver(entries => entries.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add("lihat"); io.unobserve(e.target); }
+}), { threshold: .1 });
+document.querySelectorAll(".muncul").forEach(el => io.observe(el));
+</script>
+</body>
+</html>
